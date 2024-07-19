@@ -1,0 +1,16 @@
+---
+# tasks file for httpd
+- name: Install httpd package
+  yum:
+    name: httpd
+    state: present
+- name: Start and enable httpd service
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+- name: Deploy index.html from files
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+  notify: Restart httpd
